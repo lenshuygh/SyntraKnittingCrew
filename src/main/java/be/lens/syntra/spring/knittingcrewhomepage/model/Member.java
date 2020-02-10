@@ -12,6 +12,7 @@ import java.util.Date;
 @Setter
 @Builder
 public class Member {
+    private int id;
     private String name;
     private String familyName;
     private String email;
