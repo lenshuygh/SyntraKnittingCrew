@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MemberDetails</title>
+</head>
+<body>
+<h1>Member details</h1>
+<form method="post">
+    <div><b>First name</b></div>
+    <input th:value="${member.name}"/>
+    <div><b>Last name</b></div>
+    <input th:value="${member.familyName}"/>
+    <div><b>Email</b></div>
+    <input th:value="${member.email}"/>
+    <div><b>Address</b></div>
+    Street
+    <input th:value="${member.address.street}"/>
+    Number
+    <input th:value="${member.address.houseNumber}"/>
+    P.O. Box
+    <input th:value="${member.address.poBox}"/>
+    ZipCode
+    <input th:value="${member.address.zipCode}"/>
+    City
+    <input th:value="${member.address.city}"/>
+    <div><b>Phonenumber</b></div>
+    <input th:value="${member.phone}"/>
+    <div><b>Birthdate</b></div>
+    <input th:value="${#temporals.format(member.birthDate,'dd MM yyyy')}"/>
+    <div><b>Role</b></div>
+    <input th:value="${member.knittingCrewRole}"/>
+    <div><b>Known Stitches</b></div>
+    <div>
+        <ul th:each="stitch : ${member.knownStitches}">
+            <li th:text="${stitch}">
+            </li>
+        </ul>
+    </div>
+</form>
+</body>
+</html>

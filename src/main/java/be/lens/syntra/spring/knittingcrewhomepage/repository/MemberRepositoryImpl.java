@@ -1,10 +1,13 @@
 package be.lens.syntra.spring.knittingcrewhomepage.repository;
 
+import be.lens.syntra.spring.knittingcrewhomepage.model.Address;
 import be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole;
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 import be.lens.syntra.spring.knittingcrewhomepage.model.Stitches;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 @Repository
@@ -15,10 +18,13 @@ public class MemberRepositoryImpl implements MemberRepository {
         List<Stitches> stitches = new ArrayList<>();
         stitches.add(Stitches.CABLE);
         stitches.add(Stitches.BEGINNER_LACE);
+        List<Stitches> stitches2 = new ArrayList<>(stitches);
+        stitches2.add(Stitches.RIB);
         members = new ArrayList<>();
-        Member member1 = Member.builder().name("Lens").familyName("Huygh").id(1).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.MEMBER).build();
-        Member member2 = Member.builder().name("Lens").familyName("Huygh").id(2).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.PRESIDENT).build();
-        Member member3 = Member.builder().name("Lens").familyName("Huygh").id(3).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.VICE_PRESIDENT).build();
+        Address address = Address.builder().city("Diepenbeek").houseNumber("85").poBox("/").street("Ganzestreet").zipCode("3590").build();
+            Member member1 = Member.builder().name("Lens").familyName("Huygh").id(1).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.MEMBER).address(address).phone("0498/21.26.22").birthDate(LocalDate.of(1980,06,23)).build();
+        Member member2 = Member.builder().name("Lens").familyName("Huygh").id(2).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.PRESIDENT).address(address).build();
+        Member member3 = Member.builder().name("Lens").familyName("Huygh").id(3).email("lens.huygh@gmail.com").knownStitches(stitches2).knittingCrewRole(KnittingCrewRole.VICE_PRESIDENT).address(address).build();
         members.add(member1);
         members.add(member2);
         members.add(member3);

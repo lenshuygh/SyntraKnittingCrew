@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MemberDetails</title>
+</head>
+<body>
+<h1>Member details</h1>
+<a href="detail" th:href="@{'editMember'+${member.id}}">Edit</a>
+<div><b>First name</b></div>
+<div th:text="${member.name}">first name</div>
+<div><b>Last name</b></div>
+<div th:text="${member.familyName}">email</div>
+<div><b>Email</b></div>
+<div th:text="${member.email}">email</div>
+<div><b>Address</b></div>
+<div th:text="${member.address.street +' '+ member.address.houseNumber + ' ' + member.address.poBox}">street number
+    PObox
+</div>
+<div th:text="${member.address.zipCode +' '+member.address.city}">zipcode city</div>
+<div><b>Phonenumber</b></div>
+<div th:text="${member.phone}">phone number</div>
+<div><b>Birthdate</b></div>
+<div th:text="${#temporals.format(member.birthDate,'dd MM yyyy')}">birth date</div>
+<div><b>Role</b></div>
+<div th:text="${member.knittingCrewRole}">role</div>
+<div><b>Known Stitches</b></div>
+<div>
+    <ul th:each="stitch : ${member.knownStitches}">
+        <li th:text="${stitch}">
+        </li>
+    </ul>
+</div>
+</body>
+</html>

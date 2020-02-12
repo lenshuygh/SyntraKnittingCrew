@@ -2,8 +2,8 @@ package be.lens.syntra.spring.knittingcrewhomepage.model;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +18,6 @@ public class Member {
     private KnittingCrewRole knittingCrewRole;
     private Address address;
     private String phone;
-    private Date birthDate;
+    private LocalDate birthDate;
     private Collection<Stitches> knownStitches;
 }
