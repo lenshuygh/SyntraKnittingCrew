@@ -14,4 +14,8 @@ public enum KnittingCrewRole {
 
     private String roleName;
 
+    @Override
+    public String toString() {
+        return getRoleName();
+    }
 }

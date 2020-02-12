@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Knitting Crew</title>
+</head>
+<style>
+    table {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table td {
+        border-left: 1px solid #000;
+    }
+
+    table td:first-child {
+        border-left: none;
+    }
+
+    table th {
+        border-left: 1px solid #000;
+    }
+
+    table th:first-child {
+        border-left: none;
+    }
+
+    table th {
+        background: gray
+    }
+
+    table tr:nth-child(even) {
+        background: lightgray
+    }
+</style>
+<body>
+<h1>Members</h1>
+<div>
+    <table width="100%">
+        <tr>
+            <th align="left">Name</th>
+            <th align="left">E-mail</th>
+            <th align="left">Role</th>
+            <th align="left">Number of known stitches</th>
+            <th align="left">Details</th>
+        </tr>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.name + ' ' + member.familyName}">Name FamilyName</td>
+            <td th:text="${member.email}">Email</td>
+            <td th:text="${member.knittingCrewRole}">Role</td>
+            <td th:text="${member.knownStitches.size()}">Stitches</td>
+            <td><a href="detail" th:href="@{memberDetail(id=${member.id})}">details</a></td>
+        </tr>
+    </table>
+    <br>
+    <form>
+        <input type="Submit" value="Add" style="float: righte"/>
+    </form>
+</div>
+</body>
+</html>

@@ -14,4 +14,9 @@ public enum Stitches {
     CABLE("Cable");
 
     private String stitchName;
+
+    @Override
+    public String toString() {
+        return getStitchName();
+    }
 }

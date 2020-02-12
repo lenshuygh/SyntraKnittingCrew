@@ -1,13 +1,12 @@
 package be.lens.syntra.spring.knittingcrewhomepage.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.Collection;
 import java.util.Date;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Builder
@@ -20,5 +19,5 @@ public class Member {
     private Address address;
     private String phone;
     private Date birthDate;
-    private Stitches knownStitches;
+    private Collection<Stitches> knownStitches;
 }
