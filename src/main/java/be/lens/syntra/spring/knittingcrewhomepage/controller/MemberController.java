@@ -1,5 +1,7 @@
 package be.lens.syntra.spring.knittingcrewhomepage.controller;
 
+import be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole;
+import be.lens.syntra.spring.knittingcrewhomepage.model.Stitches;
 import be.lens.syntra.spring.knittingcrewhomepage.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/knittingcrew")
@@ -28,6 +33,10 @@ public class MemberController {
     @GetMapping("/editMember{id}")
     public ModelAndView displayEditingMember(@PathVariable String id){
         memberService.getMemberById(Integer.parseInt(id));
-        return new ModelAndView("edit", "member",memberService.getMemberById(Integer.parseInt(id)));
+        Map<String,Object> modelMap = new HashMap<>();
+        modelMap.put("member",memberService.getMemberById(Integer.parseInt(id)));
+        modelMap.put("roles", KnittingCrewRole.values());
+        modelMap.put("stitches", Stitches.values());
+        return new ModelAndView("edit", "modelMap",modelMap);
     }
 }
