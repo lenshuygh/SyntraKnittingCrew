@@ -6,9 +6,11 @@ import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 import be.lens.syntra.spring.knittingcrewhomepage.model.Stitches;
 import org.springframework.stereotype.Repository;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {

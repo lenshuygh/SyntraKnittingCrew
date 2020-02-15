@@ -45,25 +45,9 @@
 
     <div><b>Role</b></div>
     <select name="knittingCrewRole" th:field="*{knittingCrewRole}">
-        <!--<select th:field="*{knittingCrewRole}">-->
         <option th:each="role : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole).values()}"
                 th:text="${role.roleName}" th:value="${role}"></option>
     </select>
-
-    <!--<select class="form-control" th:field="*{tags}" multiple="multiple">
-        <option th:each="tag: ${taglist}"
-                th:field="*{tags}"
-                th:value="${tag.id}"
-                th:text="${tag.tagName}">Tag name
-        </option>
-
-    </select>
-
-    <select name="color">
-        <option th:each="colorOpt : ${T(com.baeldung.thymeleaf.model.Color).values()}"
-                th:value="${colorOpt}" th:text="${colorOpt}"></option>
-    </select>-->
-
     <div><b>Known Stitches</b></div>
     <select multiple th:field="*{knownStitches}">
         <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
