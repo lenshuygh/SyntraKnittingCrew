@@ -16,6 +16,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/knittingcrew")
 public class MemberController {
+    private static final int NO_ID_PRESENT = -1;
     @Autowired
     MemberService memberService;
 
@@ -36,8 +37,18 @@ public class MemberController {
 
     @PostMapping("/editMember/*")
     public String saveMember(@ModelAttribute("member") Member member) {
+        if(member.getId() == NO_ID_PRESENT){
+            System.out.println("NEW FORM");
+        }
         memberService.updateMember(member);
         return "redirect:/knittingcrew/memberDetail/" + member.getId();
+    }
+
+    @PostMapping
+    public ModelAndView provideEmptyFormPage(){
+        Member member = new Member();
+        member.setId(NO_ID_PRESENT);
+        return new ModelAndView("edit","member",member);
     }
 
     // formatting the date string as a LocalDate to the specification from the annotated date field in the member model
