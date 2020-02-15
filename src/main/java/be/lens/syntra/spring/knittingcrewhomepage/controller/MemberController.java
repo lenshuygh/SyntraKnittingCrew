@@ -1,8 +1,6 @@
 package be.lens.syntra.spring.knittingcrewhomepage.controller;
 
-import be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole;
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
-import be.lens.syntra.spring.knittingcrewhomepage.model.Stitches;
 import be.lens.syntra.spring.knittingcrewhomepage.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +12,6 @@ import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/knittingcrew")
