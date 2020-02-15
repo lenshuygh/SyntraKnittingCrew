@@ -36,23 +36,27 @@ public class MemberController {
     }
 
     @PostMapping("/editMember/*")
-    public String saveMember(@ModelAttribute("member") Member member) {
-        if(member.getId() == NO_ID_PRESENT){
-            System.out.println("NEW FORM");
-        }
+    public String saveUpdatedMember(@ModelAttribute("member") Member member) {
         memberService.updateMember(member);
-        return "redirect:/knittingcrew/memberDetail/" + member.getId();
+        return "redirect:/knittingcrew";
     }
 
-    @PostMapping
+
+    @GetMapping("/addMember")
     public ModelAndView provideEmptyFormPage(){
         Member member = new Member();
         member.setId(NO_ID_PRESENT);
         return new ModelAndView("edit","member",member);
     }
 
+    @PostMapping("/addMember")
+    public String saveNewMember(@ModelAttribute("member") Member member){
+        memberService.addMember(member);
+        return "redirect:/knittingcrew";
+    }
+
     // formatting the date string as a LocalDate to the specification from the annotated date field in the member model
-    // we need to exclude other fields that could be formatted
+    // other fields that could be formatted need to be excluded
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("member.id");
