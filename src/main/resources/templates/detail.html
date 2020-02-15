@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Member details</h1>
-<a href="detail" th:href="@{'editMember'+${member.id}}">Edit</a>
+<a href="detail" th:href="@{/knittingcrew/editMember/{id} (id=${member.id})}">Edit</a>
 <div><b>First name</b></div>
 <div th:text="${member.name}">first name</div>
 <div><b>Last name</b></div>

@@ -29,28 +29,19 @@ public class MemberController {
     }
 
     @GetMapping("/memberDetail/{id}")
-    public ModelAndView displayDetail(@PathVariable String id){
-        return new ModelAndView("detail", "member",memberService.getMemberById(Integer.parseInt(id)));
+    public ModelAndView displayDetail(@PathVariable String id) {
+        return new ModelAndView("detail", "member", memberService.getMemberById(Integer.parseInt(id)));
     }
 
-    @GetMapping("/editMember{id}")
-    public ModelAndView displayEditingMember(@PathVariable String id){
-        Map<String,Object> modelMap = new HashMap<>();
-        modelMap.put("member",memberService.getMemberById(Integer.parseInt(id)));
-        modelMap.put("roles", KnittingCrewRole.values());
-        modelMap.put("stitches", Stitches.values());
-        return new ModelAndView("edit", "modelMap",modelMap);
+    @GetMapping("/editMember/{id}")
+    public ModelAndView displayEditingMember(@PathVariable String id) {
+        return new ModelAndView("edit", "member", memberService.getMemberById(Integer.parseInt(id)));
     }
 
-    @GetMapping("/editTest")
-    public ModelAndView editTest(){
-        return new ModelAndView("edittest","member",memberService.getMemberById(3));
-    }
-
-    @PostMapping("/editTest")
-    public String saveMember(@ModelAttribute("member") Member member){
+    @PostMapping("/editMember/*")
+    public String saveMember(@ModelAttribute("member") Member member) {
         memberService.updateMember(member);
-        return "redirect:/knittingcrew/memberDetail/"+member.getId();
+        return "redirect:/knittingcrew/memberDetail/" + member.getId();
     }
 
     // formatting the date string as a LocalDate to the specification from the annotated date field in the member model

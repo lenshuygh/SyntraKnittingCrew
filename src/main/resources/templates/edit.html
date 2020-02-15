@@ -1,63 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>MemberDetails</title>
 </head>
 <body>
 <h1>Member details</h1>
-<form method="post">
+<form th:object="${member}" method="post">
+    <!-- hidden field for ID value -->
+    <input type="hidden" th:field="*{id}"/>
     <div><b>First name</b></div>
-    <input name="name" th:value="${modelMap.member.name}"/>
+    <input name="name" th:field="*{name}"/>
     <div><b>Last name</b></div>
-    <input name="familyName" th:value="${modelMap.member.familyName}"/>
+    <input name="familyName" th:field="*{familyName}"/>
     <div><b>Email</b></div>
-    <input name="email" th:value="${modelMap.member.email}"/>
+    <input name="email" th:field="*{email}"/>
     <div><b>Address</b></div>
-    Street
-    <input name="street" th:value="${modelMap.member.address.street}"/>
-    Number
-    <input name="houseNumber" th:value="${modelMap.member.address.houseNumber}"/>
-    P.O. Box
-    <input name="poBox" th:value="${modelMap.member.address.poBox}"/>
-    ZipCode
-    <input name="zipCode" th:value="${modelMap.member.address.zipCode}"/>
-    City
-    <input name="city" th:value="${modelMap.member.address.city}"/>
+    <table>
+        <tr>
+            <td>Street</td>
+            <td><input name="street" th:field="*{address.street}"/></td>
+        </tr>
+        <tr>
+            <td>Number</td>
+            <td><input name="houseNumber" th:field="*{address.houseNumber}"/></td>
+        </tr>
+        <tr>
+            <td>P.O. Box</td>
+            <td><input name="poBox" th:field="*{address.poBox}"/></td>
+        </tr>
+        <tr>
+            <td>ZipCode</td>
+            <td><input name="zipCode" th:field="*{address.zipCode}"/></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><input name="city" th:field="*{address.city}"/></td>
+        </tr>
+    </table>
     <div><b>Phonenumber</b></div>
-    <input name="phone" th:value="${modelMap.member.phone}"/>
-    <div><b>Birthdate</b></div>
-    <input name="birthDate" th:value="${#temporals.format(modelMap.member.birthDate,'dd MM yyyy')}"/>
+    <input name="phone" th:field="*{phone}"/>
+    <div><b>Birthdate (as dd-mm-yyyy)</b></div>
+    <input name="birthDate" th:field="*{birthDate}"/>
+
     <div><b>Role</b></div>
-    <div>
-        <select id="role">
-            <option th:selected="(${modelMap.member.knittingCrewRole} == ${role})" th:each="role : ${modelMap.roles}"
-                    th:value="${role}" th:text="${role.toString()}">role
-            </option>
-        </select>
-    </div>
+    <select name="knittingCrewRole" th:field="*{knittingCrewRole}">
+        <option th:each="role : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole).values()}"
+                th:text="${role.roleName}" th:value="${role}"></option>
+    </select>
     <div><b>Known Stitches</b></div>
-    <div>
-        <ul th:each="stitch : ${modelMap.member.knownStitches}">
-            <li th:text="${stitch}">
-            </li>
-        </ul>
-    </div>
-    <div>
-        <select multiple th:value="${modelMap.member.knownStitches}">
-            <option th:each="stitch : ${modelMap.stitches}" th:text="${stitch.toString()}">
-                test
-            </option>
-        </select>
-    </div>
-    <div>
-        <select multiple>
-            <option th:each="stitch : ${modelMap.stitches}"
-                    th:value="${stitch}" th:text="${stitch.toString()}"
-                    th:selected="${#lists.contains(modelMap.member.knownStitches,stitch)}">stitch
-            </option>
-        </select>
-    </div>
+    <select multiple th:field="*{knownStitches}">
+        <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
+                th:text="${stitch}" th:value="${{stitch}}"></option>
+    </select>
+    <input type="submit" value="Save"/>
 </form>
 </body>
 </html>
