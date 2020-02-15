@@ -44,6 +44,13 @@
         </ul>
     </div>
     <div>
+        <select multiple th:value="${modelMap.member.knownStitches}">
+            <option th:each="stitch : ${modelMap.stitches}" th:text="${stitch.toString()}">
+                test
+            </option>
+        </select>
+    </div>
+    <div>
         <select multiple>
             <option th:each="stitch : ${modelMap.stitches}"
                     th:value="${stitch}" th:text="${stitch.toString()}"
