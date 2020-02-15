@@ -30,13 +30,11 @@ public class MemberController {
 
     @GetMapping("/memberDetail/{id}")
     public ModelAndView displayDetail(@PathVariable String id){
-        //memberService.getMemberById(Integer.parseInt(id));
         return new ModelAndView("detail", "member",memberService.getMemberById(Integer.parseInt(id)));
     }
 
     @GetMapping("/editMember{id}")
     public ModelAndView displayEditingMember(@PathVariable String id){
-        //memberService.getMemberById(Integer.parseInt(id));
         Map<String,Object> modelMap = new HashMap<>();
         modelMap.put("member",memberService.getMemberById(Integer.parseInt(id)));
         modelMap.put("roles", KnittingCrewRole.values());
@@ -71,6 +69,5 @@ public class MemberController {
                 }
             }
         });
-
     }
 }
