@@ -23,7 +23,7 @@
 <div><b>Birthdate</b></div>
 <div th:text="${#temporals.format(member.birthDate,'dd MM yyyy')}">birth date</div>
 <div><b>Role</b></div>
-<div th:text="${member.knittingCrewRole}">role</div>
+<div th:text="${member.knittingCrewRole.roleName}">role</div>
 <div><b>Known Stitches</b></div>
 <div>
     <ul th:each="stitch : ${member.knownStitches}">

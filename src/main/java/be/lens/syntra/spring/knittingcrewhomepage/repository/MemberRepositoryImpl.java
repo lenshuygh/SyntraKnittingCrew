@@ -44,4 +44,9 @@ public class MemberRepositoryImpl implements MemberRepository {
     public void addMember(Member member) {
         members.add(member);
     }
+
+    @Override
+    public void removeMember(Member member) {
+        members.remove(member);
+    }
 }

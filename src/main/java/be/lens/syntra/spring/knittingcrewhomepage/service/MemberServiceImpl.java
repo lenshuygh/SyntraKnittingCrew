@@ -32,4 +32,11 @@ public class MemberServiceImpl implements MemberService {
         }
         return memberOptional.get();
     }
+
+    @Override
+    public void updateMember(Member updatedMember) {
+        Member memberToUpdate = memberRepository.getMember(updatedMember.getId()).get();
+        memberRepository.removeMember(memberToUpdate);
+        memberRepository.addMember(updatedMember);
+    }
 }

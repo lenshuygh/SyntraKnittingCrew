@@ -11,4 +11,6 @@ public interface MemberService {
     Collection<Member> getAllMembers();
 
     Member getMemberById(int id);
+
+    void updateMember(Member member);
 }

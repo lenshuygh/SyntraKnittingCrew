@@ -11,4 +11,6 @@ public interface MemberRepository {
     Optional<Member> getMember(int id);
 
     void addMember(Member member);
+
+    void removeMember(Member member);
 }

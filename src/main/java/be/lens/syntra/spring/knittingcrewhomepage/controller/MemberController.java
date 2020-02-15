@@ -7,11 +7,14 @@ import be.lens.syntra.spring.knittingcrewhomepage.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.beans.PropertyEditorSupport;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +46,32 @@ public class MemberController {
     }
 
     @GetMapping("/editTest")
-    public ModelAndView editTest(Model model){
+    public ModelAndView editTest(){
         return new ModelAndView("edittest","member",memberService.getMemberById(3));
+    }
+
+    @PostMapping("/editTest")
+    public String saveMember(@ModelAttribute("member") Member member){
+        memberService.updateMember(member);
+        return "redirect:/knittingcrew/memberDetail/"+member.getId();
+    }
+
+    // formatting the date string as a LocalDate to the specification from the annotated date field in the member model
+    // we need to exclude other fields that could be formatted
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("member.id");
+
+        dataBinder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String value) {
+                try {
+                    setValue(new SimpleDateFormat("dd-MM-yyyy").parse(value));
+                } catch (ParseException e) {
+                    setValue(null);
+                }
+            }
+        });
+
     }
 }
