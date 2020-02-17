@@ -1,8 +1,6 @@
 package be.lens.syntra.spring.knittingcrewhomepage.controller;
 
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
-import be.lens.syntra.spring.knittingcrewhomepage.model.utility.comparator.SortMembersByName;
-import be.lens.syntra.spring.knittingcrewhomepage.model.utility.comparator.SortMembersByRole;
 import be.lens.syntra.spring.knittingcrewhomepage.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 @Controller
@@ -23,17 +22,15 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @Autowired
+    Comparator memberComparator;
+
     @GetMapping
     public String displayOverView(Model model) {
         model.addAttribute("members",memberService.getAllMembers());
-        model.addAttribute("sorter",new SortMembersByName());
+        model.addAttribute("sorter",memberComparator);
         return "overview";
     }
-
-    /*@GetMapping
-    public ModelAndView displayOverView() {
-        return new ModelAndView("overview", "members", memberService.getAllMembers());
-    }*/
 
     @GetMapping("/memberDetail/{id}")
     public ModelAndView displayDetail(@PathVariable String id) {
