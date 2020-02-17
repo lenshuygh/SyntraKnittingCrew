@@ -1,9 +1,12 @@
 package be.lens.syntra.spring.knittingcrewhomepage.controller;
 
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
+import be.lens.syntra.spring.knittingcrewhomepage.model.utility.comparator.SortMembersByName;
+import be.lens.syntra.spring.knittingcrewhomepage.model.utility.comparator.SortMembersByRole;
 import be.lens.syntra.spring.knittingcrewhomepage.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,9 +24,16 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping
+    public String displayOverView(Model model) {
+        model.addAttribute("members",memberService.getAllMembers());
+        model.addAttribute("sorter",new SortMembersByName());
+        return "overview";
+    }
+
+    /*@GetMapping
     public ModelAndView displayOverView() {
         return new ModelAndView("overview", "members", memberService.getAllMembers());
-    }
+    }*/
 
     @GetMapping("/memberDetail/{id}")
     public ModelAndView displayDetail(@PathVariable String id) {
@@ -60,7 +70,6 @@ public class MemberController {
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("member.id");
-
         dataBinder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String value) {

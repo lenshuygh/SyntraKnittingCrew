@@ -2,12 +2,12 @@ package be.lens.syntra.spring.knittingcrewhomepage.service;
 
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface MemberService {
     void addMember(Member member);
 
-    Collection<Member> getAllMembers();
+    List<Member> getAllMembers();
 
     Member getMemberById(int id);
 

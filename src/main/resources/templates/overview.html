@@ -45,7 +45,7 @@
             <th align="left">Number of known stitches</th>
             <th align="left">Details</th>
         </tr>
-        <tr th:each="member : ${members}">
+        <tr th:each="member : ${#lists.sort(members,sorter)}">
             <td th:text="${member.name + ' ' + member.familyName}">Name FamilyName</td>
             <td th:text="${member.email}">Email</td>
             <td th:text="${member.knittingCrewRole.roleName}">Role</td>

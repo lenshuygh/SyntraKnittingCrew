@@ -2,11 +2,11 @@ package be.lens.syntra.spring.knittingcrewhomepage.repository;
 
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository {
-    Collection<Member> getAllMembers();
+    List<Member> getAllMembers();
 
     Optional<Member> getMember(int id);
 
