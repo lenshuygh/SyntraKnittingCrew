@@ -23,7 +23,7 @@ public class MemberController {
     MemberService memberService;
 
     @Autowired
-    Comparator memberComparator;
+    Comparator<Member> memberComparator;
 
     @GetMapping
     public String displayOverView(Model model) {
