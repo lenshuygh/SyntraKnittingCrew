@@ -14,6 +14,7 @@ import java.util.OptionalInt;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
+    private static final int ID_FOR_NEW_MEMBER = -1;
     private List<Member> members;
 
     public MemberRepositoryImpl() {
@@ -24,11 +25,11 @@ public class MemberRepositoryImpl implements MemberRepository {
         stitches2.add(Stitches.RIB);
         members = new ArrayList<>();
         Address address = Address.builder().city("Diepenbeek").houseNumber("85").poBox("/").street("Ganzestreet").zipCode("3590").build();
-            Member member1 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.MEMBER).address(address).phone("0498/21.26.22").birthDate(LocalDate.of(1980,06,23)).build();
-        Member member2 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.PRESIDENT).address(address).build();
-        Member member3 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches2).knittingCrewRole(KnittingCrewRole.VICE_PRESIDENT).address(address).build();
+        Member member1 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.MEMBER).address(address).phone("0498/21.26.22").birthDate(LocalDate.of(1980, 06, 23)).build();
         members.add(member1);
+        Member member2 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.PRESIDENT).address(address).build();
         members.add(member2);
+        Member member3 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches2).knittingCrewRole(KnittingCrewRole.VICE_PRESIDENT).address(address).build();
         members.add(member3);
     }
 
@@ -44,7 +45,10 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     @Override
     public void addMember(Member member) {
-        members.add(member.setId(createId()));
+        if(member.getId() == ID_FOR_NEW_MEMBER) {
+            member.setId(createId());
+        }
+        members.add(member);
     }
 
     @Override
@@ -52,8 +56,8 @@ public class MemberRepositoryImpl implements MemberRepository {
         members.remove(member);
     }
 
-    private int createId(){
+    private int createId() {
         OptionalInt max = members.stream().mapToInt(Member::getId).max();
-        return max.isEmpty() ? 1 : max.getAsInt() +1 ;
+        return max.isEmpty() ? 1 : max.getAsInt() + 1;
     }
 }

@@ -18,7 +18,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/knittingcrew")
 public class MemberController {
-    private static final int NO_ID_PRESENT = -1;
+    private static final int ID_FOR_NEW_MEMBER = -1;
     @Autowired
     MemberService memberService;
 
@@ -52,7 +52,7 @@ public class MemberController {
     @GetMapping("/addMember")
     public ModelAndView provideEmptyFormPage(){
         Member member = new Member();
-        member.setId(NO_ID_PRESENT);
+        member.setId(ID_FOR_NEW_MEMBER);
         return new ModelAndView("edit","member",member);
     }
 
