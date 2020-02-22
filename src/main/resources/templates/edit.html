@@ -3,51 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <title>MemberDetails</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <h1>Member details</h1>
 <form th:object="${member}" method="post">
     <!-- hidden field for ID value -->
     <input type="hidden" th:field="*{id}"/>
-    <div><b>First name</b></div>
-    <input name="name" th:field="*{name}"/>
-    <div><b>Last name</b></div>
-    <input name="familyName" th:field="*{familyName}"/>
-    <div><b>Email</b></div>
-    <input name="email" th:field="*{email}"/>
+    <!--<div><b>First name</b></div>
+    <input name="name" th:field="*{name}"/>-->
+    <div class="mdc-text-field mdc-text-field--outlined">
+        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{name}">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="text-field-hero-input"
+                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Name</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+
+    <!-- <div><b>Last name</b></div>
+     <input name="familyName" th:field="*{familyName}"/>-->
+    <div class="mdc-text-field mdc-text-field--outlined">
+        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{familyName}">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="text-field-hero-input"
+                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Last
+                    name</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <!--<div><b>Email</b></div>
+    <input name="email" th:field="*{email}"/>-->
+    <div class="mdc-text-field mdc-text-field--outlined">
+        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{email}">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="text-field-hero-input"
+                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Email</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
     <div><b>Address</b></div>
     <table>
         <tr>
-            <td>Street</td>
-            <td><input name="street" th:field="*{address.street}"/></td>
+            <!--<td>Street</td>
+            <td><input name="street" th:field="*{address.street}"/></td>-->
+
+            <div class="mdc-text-field mdc-text-field--outlined">
+                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
+                       th:field="*{address.street}">
+                <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="text-field-hero-input"
+                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Street</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                </div>
+            </div>
         </tr>
         <tr>
-            <td>Number</td>
-            <td><input name="houseNumber" th:field="*{address.houseNumber}"/></td>
+            <!--<td>Number</td>
+            <td><input name="houseNumber" th:field="*{address.houseNumber}"/></td>-->
+
+            <div class="mdc-text-field mdc-text-field--outlined">
+                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
+                       th:field="*{address.houseNumber}">
+                <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="text-field-hero-input"
+                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Number</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                </div>
+            </div>
         </tr>
         <tr>
-            <td>P.O. Box</td>
-            <td><input name="poBox" th:field="*{address.poBox}"/></td>
+            <!--<td>P.O. Box</td>
+            <td><input name="poBox" th:field="*{address.poBox}"/></td>-->
+
+            <div class="mdc-text-field mdc-text-field--outlined">
+                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
+                       th:field="*{address.poBox}">
+                <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="text-field-hero-input"
+                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">P.O.
+                            Box</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                </div>
+            </div>
         </tr>
         <tr>
-            <td>ZipCode</td>
-            <td><input name="zipCode" th:field="*{address.zipCode}"/></td>
+            <!--<td>ZipCode</td>
+            <td><input name="zipCode" th:field="*{address.zipCode}"/></td>-->
+
+            <div class="mdc-text-field mdc-text-field--outlined">
+                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
+                       th:field="*{address.zipCode}">
+                <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="text-field-hero-input"
+                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">ZipCode</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                </div>
+            </div>
         </tr>
         <tr>
-            <td>City</td>
-            <td><input name="city" th:field="*{address.city}"/></td>
+            <!--<td>City</td>
+            <td><input name="city" th:field="*{address.city}"/></td>-->
+
+            <div class="mdc-text-field mdc-text-field--outlined">
+                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
+                       th:field="*{address.city}">
+                <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="text-field-hero-input"
+                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">City</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                </div>
+            </div>
         </tr>
     </table>
-    <div><b>Phonenumber</b></div>
-    <input name="phone" th:field="*{phone}"/>
-    <div><b>Birthdate (as dd-mm-yyyy)</b></div>
-    <input name="birthDate" th:field="*{birthDate}"/>
+    <!--<div><b>Phonenumber</b></div>
+    <input name="phone" th:field="*{phone}"/>-->
+    <div class="mdc-text-field mdc-text-field--outlined">
+        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{phone}">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="text-field-hero-input"
+                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Phonenumber</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <!--<div><b>Birthdate (as dd-mm-yyyy)</b></div>
+    <input name="birthDate" th:field="*{birthDate}"/>-->
+    <div class="mdc-text-field mdc-text-field--outlined">
+        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{birthDate}">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="text-field-hero-input"
+                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Birthdate</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
 
     <div><b>Role</b></div>
     <select name="knittingCrewRole" th:field="*{knittingCrewRole}">
         <option th:each="role : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole).values()}"
                 th:text="${role.roleName}" th:value="${role}"></option>
     </select>
+
+
     <div><b>Known Stitches</b></div>
     <select multiple th:field="*{knownStitches}">
         <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
@@ -57,3 +185,8 @@
 </form>
 </body>
 </html>
+<!-- at the bottom of the page -->
+<script type="text/javascript">
+    /*window.mdc.autoInit();*/
+    mdc.autoInit();
+</script>
