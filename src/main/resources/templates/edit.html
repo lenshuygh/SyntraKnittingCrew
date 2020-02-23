@@ -3,190 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>MemberDetails</title>
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <!--material design lite-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-deep_orange.min.css"/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        .page {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    </style>
 </head>
-<body>
-<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-<h1>Member details</h1>
+<body class="page">
+<h3>Member details</h3>
 <form th:object="${member}" method="post">
-    <!-- hidden field for ID value -->
     <input type="hidden" th:field="*{id}"/>
-    <!--<div><b>First name</b></div>
-    <input name="name" th:field="*{name}"/>-->
-    <div class="mdc-text-field mdc-text-field--outlined">
-        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{name}">
-        <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-                <label for="text-field-hero-input"
-                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Name</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-        </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="name" th:field="*{name}">
+        <label class="mdl-textfield__label" for="name">Name</label>
     </div>
-
-    <!-- <div><b>Last name</b></div>
-     <input name="familyName" th:field="*{familyName}"/>-->
-    <div class="mdc-text-field mdc-text-field--outlined">
-        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{familyName}">
-        <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-                <label for="text-field-hero-input"
-                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Last
-                    name</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-        </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="fName" th:field="*{familyName}">
+        <label class="mdl-textfield__label" for="fName">Last name</label>
     </div>
-    <!--<div><b>Email</b></div>
-    <input name="email" th:field="*{email}"/>-->
-    <div class="mdc-text-field mdc-text-field--outlined">
-        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{email}">
-        <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-                <label for="text-field-hero-input"
-                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Email</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-        </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="mail" th:field="*{email}">
+        <label class="mdl-textfield__label" for="mail">Email address</label>
     </div>
-    <div><b>Address</b></div>
-    <table>
-        <tr>
-            <!--<td>Street</td>
-            <td><input name="street" th:field="*{address.street}"/></td>-->
-
-            <div class="mdc-text-field mdc-text-field--outlined">
-                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
-                       th:field="*{address.street}">
-                <div class="mdc-notched-outline">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch">
-                        <label for="text-field-hero-input"
-                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Street</label>
-                    </div>
-                    <div class="mdc-notched-outline__trailing"></div>
-                </div>
-            </div>
-        </tr>
-        <tr>
-            <!--<td>Number</td>
-            <td><input name="houseNumber" th:field="*{address.houseNumber}"/></td>-->
-
-            <div class="mdc-text-field mdc-text-field--outlined">
-                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
-                       th:field="*{address.houseNumber}">
-                <div class="mdc-notched-outline">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch">
-                        <label for="text-field-hero-input"
-                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Number</label>
-                    </div>
-                    <div class="mdc-notched-outline__trailing"></div>
-                </div>
-            </div>
-        </tr>
-        <tr>
-            <!--<td>P.O. Box</td>
-            <td><input name="poBox" th:field="*{address.poBox}"/></td>-->
-
-            <div class="mdc-text-field mdc-text-field--outlined">
-                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
-                       th:field="*{address.poBox}">
-                <div class="mdc-notched-outline">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch">
-                        <label for="text-field-hero-input"
-                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">P.O.
-                            Box</label>
-                    </div>
-                    <div class="mdc-notched-outline__trailing"></div>
-                </div>
-            </div>
-        </tr>
-        <tr>
-            <!--<td>ZipCode</td>
-            <td><input name="zipCode" th:field="*{address.zipCode}"/></td>-->
-
-            <div class="mdc-text-field mdc-text-field--outlined">
-                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
-                       th:field="*{address.zipCode}">
-                <div class="mdc-notched-outline">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch">
-                        <label for="text-field-hero-input"
-                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">ZipCode</label>
-                    </div>
-                    <div class="mdc-notched-outline__trailing"></div>
-                </div>
-            </div>
-        </tr>
-        <tr>
-            <!--<td>City</td>
-            <td><input name="city" th:field="*{address.city}"/></td>-->
-
-            <div class="mdc-text-field mdc-text-field--outlined">
-                <input class="mdc-text-field__input" id="text-field-hero-input" name="street"
-                       th:field="*{address.city}">
-                <div class="mdc-notched-outline">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch">
-                        <label for="text-field-hero-input"
-                               class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">City</label>
-                    </div>
-                    <div class="mdc-notched-outline__trailing"></div>
-                </div>
-            </div>
-        </tr>
-    </table>
-    <!--<div><b>Phonenumber</b></div>
-    <input name="phone" th:field="*{phone}"/>-->
-    <div class="mdc-text-field mdc-text-field--outlined">
-        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{phone}">
-        <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-                <label for="text-field-hero-input"
-                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Phonenumber</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-        </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="street" th:field="*{address.street}">
+        <label class="mdl-textfield__label" for="street">Street</label>
     </div>
-    <!--<div><b>Birthdate (as dd-mm-yyyy)</b></div>
-    <input name="birthDate" th:field="*{birthDate}"/>-->
-    <div class="mdc-text-field mdc-text-field--outlined">
-        <input class="mdc-text-field__input" id="text-field-hero-input" name="street" th:field="*{birthDate}">
-        <div class="mdc-notched-outline">
-            <div class="mdc-notched-outline__leading"></div>
-            <div class="mdc-notched-outline__notch">
-                <label for="text-field-hero-input"
-                       class="mdc-textfield-outlined mdc-floating-label mdc-floating-label--float-above">Birthdate</label>
-            </div>
-            <div class="mdc-notched-outline__trailing"></div>
-        </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="houseN" th:field="*{address.houseNumber}">
+        <label class="mdl-textfield__label" for="houseN">Number</label>
     </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="poBox" th:field="*{address.poBox}">
+        <label class="mdl-textfield__label" for="poBox">PO Box</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="zip" th:field="*{address.zipCode}">
+        <label class="mdl-textfield__label" for="zip">Zipcode</label>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="city" th:field="*{address.city}">
+        <label class="mdl-textfield__label" for="city">City</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="phone" th:field="*{phone}">
+        <label class="mdl-textfield__label" for="phone">Phonenumber</label>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="bDate" th:field="*{birthDate}">
+        <label class="mdl-textfield__label" for="bDate">Birthdate</label>
+    </div>
+    <br>
 
-    <div><b>Role</b></div>
-    <select name="knittingCrewRole" th:field="*{knittingCrewRole}">
-        <option th:each="role : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole).values()}"
-                th:text="${role.roleName}" th:value="${role}"></option>
-    </select>
-
-
-    <div><b>Known Stitches</b></div>
-    <select multiple th:field="*{knownStitches}">
-        <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
-                th:text="${stitch}" th:value="${{stitch}}"></option>
-    </select>
-    <input type="submit" value="Save"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="roleLabel" disabled>
+        <label class="mdl-textfield__label" for="roleLabel">Role</label>
+        <select id="myselect" name="knittingCrewRole" class="mdl-selectfield__select" th:field="*{knittingCrewRole}">
+            <option th:each="role : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole).values()}"
+                    th:text="${role.roleName}" th:value="${role}"></option>
+        </select>
+    </div>
+    <br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="stitchLabel" disabled>
+        <label class="mdl-textfield__label" for="stitchLabel">Known stitches</label>
+        <select multiple id="myselect2" name="knittingCrewRole" class="mdl-selectfield__select" th:field="*{knownStitches}">
+            <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
+                    th:text="${stitch}" th:value="${{stitch}}"></option>
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+        <i class="material-icons">save</i> SAVE
+    </button>
 </form>
 </body>
 </html>
-<!-- at the bottom of the page -->
-<script type="text/javascript">
-    /*window.mdc.autoInit();*/
-    mdc.autoInit();
-</script>

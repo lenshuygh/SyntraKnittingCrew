@@ -1,80 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet"
+          href="http://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
     <meta charset="UTF-8">
     <title>Knitting Crew</title>
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <!--material design lite-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-deep_orange.min.css"/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        .page{
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    </style>
 </head>
-<style>
-    /*table {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    table td {
-        border-left: 1px solid #000;
-    }
-
-    table td:first-child {
-        border-left: none;
-    }
-
-    table th {
-        border-left: 1px solid #000;
-    }
-
-    table th:first-child {
-        border-left: none;
-    }
-
-    table th {
-        background: gray
-    }
-
-    table tr:nth-child(even) {
-        background: lightgray
-    }*/
-</style>
-<body class="mdc-typography">
-<h1>Members</h1>
+<body class="page">
+<h3>Members</h3>
 <div>
-    <div class="mdc-data-table">
-        <table width="100%" class="mdc-data-table__table">
-            <thead>
-            <tr class="mdc-data-table__header-row">
-                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Name</th>
-                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">E-mail</th>
-                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Role</th>
-                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Number of known stitches</th>
-                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Details</th>
+    <table width="90%" class="mdl-data-table mdl-js-data-table">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Name</th>
+                <th class="mdl-data-table__cell--non-numeric">E-mail</th>
+                <th class="mdl-data-table__cell--non-numeric">Role</th>
+                <th class="mdl-data-table__cell--non-numeric">Number of known stitches</th>
+                <th class="mdl-data-table__cell--non-numeric">Details</th>
             </tr>
-            </thead>
-            <tbody class="mdc-data-table__content">
-            <tr class="mdc-data-table__row" th:each="member : ${#lists.sort(members,sorter)}">
-                <td class="mdc-data-table__cell" th:text="${member.name + ' ' + member.familyName}">Name FamilyName</td>
-                <td class="mdc-data-table__cell" th:text="${member.email}">Email</td>
-                <td class="mdc-data-table__cell" th:text="${member.knittingCrewRole.roleName}">Role</td>
-                <td class="mdc-data-table__cell" th:text="${member.knownStitches.size()}">Stitches</td>
-                <td class="mdc-data-table__cell"><a href="detail" th:href="@{/knittingcrew/memberDetail/{id} (id=${member.id})}">details</a></td>
+        </thead>
+        <tbody>
+            <tr th:each="member : ${#lists.sort(members,sorter)}">
+                <td th:text="${member.name + ' ' + member.familyName}" class="mdl-data-table__cell--non-numeric">Name FamilyName</td>
+                <td th:text="${member.email}" class="mdl-data-table__cell--non-numeric">Email</td>
+                <td th:text="${member.knittingCrewRole.roleName}" class="mdl-data-table__cell--non-numeric">Role</td>
+                <td th:text="${member.knownStitches.size()}" class="mdl-data-table__cell--non-numeric">Stitches</td>
+                <td class="mdl-data-table__cell--non-numeric"><a href="detail" th:href="@{/knittingcrew/memberDetail/{id} (id=${member.id})}">details</a></td>
             </tr>
-            </tbody>
-        </table>
-    </div>
-    <br><br>
+        </tbody>
+    </table>
+    <br>
     <form action="/knittingcrew/addMember">
-        <!--<button class="mdc-button__label" type="submit" style="float: right">Add</button>-->
-        <!--<button class="mdc-button" style="float: right">
-            <span class="mdc-button__label" type="submit" >Add</span>
-        </button>-->
-        <button class="mdc-button mdc-button--raised" type="submit" style="float: right">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-            <span class="mdc-button__label">Add</span>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+            <i class="material-icons">add</i> ADD
         </button>
-        <!--<button class="mdc-fab" aria-label="Add" type="submit" style="float: right">
-            <span class="mdc-fab__icon material-icons">add</span>
-        </button>-->
     </form>
 </div>
 </body>

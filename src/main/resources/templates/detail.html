@@ -1,38 +1,92 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet"
+          href="http://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
     <meta charset="UTF-8">
     <title>MemberDetails</title>
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <!--material design lite-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <!--<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-deep_orange.min.css"/>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        .mdl-textfield {
+            height: 2px;
+        }
+
+        .mdl-list {
+            padding-top: 1px;
+            padding-bottom: 1px;
+        }
+
+        .mdl-list__item {
+            padding-top: 1px;
+            padding-bottom: 1px;
+            min-height: 20px;
+        }
+
+        .page {
+            padding-left: 50px;
+        }
+    </style>
 </head>
-<body>
-<h1>Member details</h1>
-<a href="detail" th:href="@{/knittingcrew/editMember/{id} (id=${member.id})}">Edit</a>
-<div><b>First name</b></div>
-<div th:text="${member.name}">first name</div>
-<div><b>Last name</b></div>
-<div th:text="${member.familyName}">email</div>
-<div><b>Email</b></div>
-<div th:text="${member.email}">email</div>
-<div><b>Address</b></div>
-<div th:text="${member.address.street +' '+ member.address.houseNumber + ' ' + member.address.poBox}">street number
-    PObox
+<body class="page">
+<h3>Member details</h3>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="fName" th:text="${member.name}" disabled>
+    <label class="mdl-textfield__label" for="fName">First name</label>
 </div>
-<div th:text="${member.address.zipCode +' '+member.address.city}">zipcode city</div>
-<div><b>Phonenumber</b></div>
-<div th:text="${member.phone}">phone number</div>
-<div><b>Birthdate</b></div>
-<div th:text="${#temporals.format(member.birthDate,'dd MM yyyy')}">birth date</div>
-<div><b>Role</b></div>
-<div th:text="${member.knittingCrewRole.roleName}">role</div>
-<div><b>Known Stitches</b></div>
-<div>
-    <ul th:each="stitch : ${member.knownStitches}">
-        <li th:text="${stitch}">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="lName" th:text="${member.familyName}" disabled>
+    <label class="mdl-textfield__label" for="lName">Last name</label>
+</div>
+<br>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="email" th:text="${member.email}" disabled>
+    <label class="mdl-textfield__label" for="email">Email</label>
+</div>
+<br>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="address"
+           th:text="${member.address.street +' '+ member.address.houseNumber + ' ' + member.address.poBox}" disabled>
+    <input class="mdl-textfield__input" type="text" id="address2"
+           th:text="${member.address.zipCode +' '+member.address.city}" disabled>
+    <label class="mdl-textfield__label" for="address">Address</label>
+</div>
+<br>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="phone" th:text="${member.phone}" disabled>
+    <label class="mdl-textfield__label" for="phone">Phonenumber</label>
+</div>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="bDate"
+           th:text="${#temporals.format(member.birthDate,'dd MM yyyy')}" disabled>
+    <label class="mdl-textfield__label" for="bDate">Birthdate</label>
+</div>
+<br>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="role" th:text="${member.knittingCrewRole.roleName}" disabled>
+    <label class="mdl-textfield__label" for="role">Role</label>
+</div>
+<br>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="myList" disabled>
+    <ul class="demo-list-action mdl-list" th:each="stitch : ${member.knownStitches}">
+        <li class="mdl-list__item">
+            <a class="mdl-list__item-secondary-action"><i class="material-icons">close</i>  </a>
+            <span class="mdl-list__item-primary-content" th:text="${stitch}">Stitch</span>
         </li>
     </ul>
+    <label class="mdl-textfield__label" for="myList">Known stitches</label>
 </div>
+<br>
+<br>
+<form th:action="@{/knittingcrew/editMember/{id} (id=${member.id})}">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+        <i class="material-icons">edit</i> EDIT
+    </button>
+</form>
 </body>
 </html>
