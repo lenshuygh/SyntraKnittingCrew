@@ -16,6 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/knittingcrew/addMember").hasRole("ADMIN")
                 .and()
                 .formLogin()
+                .loginPage("/knittingcrew/login")
+                .permitAll()
                 .and()
                 .csrf().disable();
     }

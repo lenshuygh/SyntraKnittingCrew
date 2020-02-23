@@ -62,6 +62,11 @@ public class MemberController {
         return "redirect:/knittingcrew";
     }
 
+    @GetMapping("/login")
+    public String displayLoginForm(){
+        return "loginForm";
+    }
+
     // formatting the date string as a LocalDate to the specification from the annotated date field in the member model
     // other fields that could be formatted need to be excluded
     @InitBinder
