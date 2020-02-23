@@ -14,24 +14,25 @@
         .mdl-textfield {
             height: 2px;
         }
-        .mdl-list{
+
+        .mdl-list {
             padding-top: 1px;
             padding-bottom: 1px;
         }
-        .mdl-list__item{
+
+        .mdl-list__item {
             padding-top: 1px;
             padding-bottom: 1px;
             min-height: 20px;
         }
-        .page{
+
+        .page {
             padding-left: 50px;
         }
     </style>
 </head>
 <body class="page">
 <h3>Member details</h3>
-<a href="detail" th:href="@{/knittingcrew/editMember/{id} (id=${member.id})}">Edit</a>
-<br>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" type="text" id="fName" th:text="${member.name}" disabled>
     <label class="mdl-textfield__label" for="fName">First name</label>
@@ -71,15 +72,21 @@
 </div>
 <br>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input id="myList" disabled>
+    <input class="mdl-textfield__input" type="text" id="myList" disabled>
     <ul class="demo-list-action mdl-list" th:each="stitch : ${member.knownStitches}">
         <li class="mdl-list__item">
-            <a class="mdl-list__item-secondary-action"><i class="material-icons">label</i></a>
+            <a class="mdl-list__item-secondary-action"><i class="material-icons">close</i>  </a>
             <span class="mdl-list__item-primary-content" th:text="${stitch}">Stitch</span>
         </li>
     </ul>
     <label class="mdl-textfield__label" for="myList">Known stitches</label>
 </div>
-</div>
+<br>
+<br>
+<form th:action="@{/knittingcrew/editMember/{id} (id=${member.id})}">
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+        <i class="material-icons">edit</i> EDIT
+    </button>
+</form>
 </body>
 </html>
