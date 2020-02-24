@@ -25,7 +25,7 @@ public class MemberController {
     @Autowired
     Comparator<Member> memberComparator;
 
-    @GetMapping
+    @GetMapping("/overview")
     public String displayOverView(Model model) {
         model.addAttribute("members",memberService.getAllMembers());
         model.addAttribute("sorter",memberComparator);
@@ -45,7 +45,7 @@ public class MemberController {
     @PostMapping("/editMember/*")
     public String saveUpdatedMember(@ModelAttribute("member") Member member) {
         memberService.updateMember(member);
-        return "redirect:/knittingcrew";
+        return "redirect:/knittingcrew/overview";
     }
 
 
@@ -59,7 +59,12 @@ public class MemberController {
     @PostMapping("/addMember")
     public String saveNewMember(@ModelAttribute("member") Member member){
         memberService.addMember(member);
-        return "redirect:/knittingcrew";
+        return "redirect:/knittingcrew/overview";
+    }
+
+    @GetMapping
+    public String displayStartPage(){
+        return "redirect:/knittingcrew/login";
     }
 
     @GetMapping("/login")
