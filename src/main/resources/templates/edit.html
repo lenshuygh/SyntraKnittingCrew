@@ -76,7 +76,8 @@
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" type="text" id="stitchLabel" disabled>
         <label class="mdl-textfield__label" for="stitchLabel">Known stitches</label>
-        <select multiple id="myselect2" name="knittingCrewRole" class="mdl-selectfield__select" th:field="*{knownStitches}">
+        <select multiple id="myselect2" name="knittingCrewRole" class="mdl-selectfield__select"
+                th:field="*{knownStitches}">
             <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
                     th:text="${stitch}" th:value="${{stitch}}"></option>
         </select>

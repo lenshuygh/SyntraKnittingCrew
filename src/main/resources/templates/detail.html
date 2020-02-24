@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet"
           href="http://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
@@ -75,7 +75,7 @@
     <input class="mdl-textfield__input" type="text" id="myList" disabled>
     <ul class="demo-list-action mdl-list" th:each="stitch : ${member.knownStitches}">
         <li class="mdl-list__item">
-            <a class="mdl-list__item-secondary-action"><i class="material-icons">close</i>  </a>
+            <a class="mdl-list__item-secondary-action"><i class="material-icons">close</i> </a>
             <span class="mdl-list__item-primary-content" th:text="${stitch}">Stitch</span>
         </li>
     </ul>
@@ -83,10 +83,12 @@
 </div>
 <br>
 <br>
-<form th:action="@{/knittingcrew/editMember/{id} (id=${member.id})}">
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
-        <i class="material-icons">edit</i> EDIT
-    </button>
-</form>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <form th:action="@{/knittingcrew/editMember/{id} (id=${member.id})}">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+            <i class="material-icons">edit</i> EDIT
+        </button>
+    </form>
+</div>
 </body>
 </html>

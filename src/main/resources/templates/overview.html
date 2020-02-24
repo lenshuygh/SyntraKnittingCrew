@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet"
           href="http://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-deep_orange.min.css"/>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <style>
-        .page{
+        .page {
             padding-left: 50px;
             padding-right: 50px;
         }
@@ -21,30 +21,36 @@
 <div>
     <table width="90%" class="mdl-data-table mdl-js-data-table">
         <thead>
-            <tr>
-                <th class="mdl-data-table__cell--non-numeric">Name</th>
-                <th class="mdl-data-table__cell--non-numeric">E-mail</th>
-                <th class="mdl-data-table__cell--non-numeric">Role</th>
-                <th class="mdl-data-table__cell--non-numeric">Number of known stitches</th>
-                <th class="mdl-data-table__cell--non-numeric">Details</th>
-            </tr>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Name</th>
+            <th class="mdl-data-table__cell--non-numeric">E-mail</th>
+            <th class="mdl-data-table__cell--non-numeric">Role</th>
+            <th class="mdl-data-table__cell--non-numeric">Number of known stitches</th>
+            <th class="mdl-data-table__cell--non-numeric">Details</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="member : ${#lists.sort(members,sorter)}">
-                <td th:text="${member.name + ' ' + member.familyName}" class="mdl-data-table__cell--non-numeric">Name FamilyName</td>
-                <td th:text="${member.email}" class="mdl-data-table__cell--non-numeric">Email</td>
-                <td th:text="${member.knittingCrewRole.roleName}" class="mdl-data-table__cell--non-numeric">Role</td>
-                <td th:text="${member.knownStitches.size()}" class="mdl-data-table__cell--non-numeric">Stitches</td>
-                <td class="mdl-data-table__cell--non-numeric"><a href="detail" th:href="@{/knittingcrew/memberDetail/{id} (id=${member.id})}">details</a></td>
-            </tr>
+        <tr th:each="member : ${#lists.sort(members,sorter)}">
+            <td th:text="${member.name + ' ' + member.familyName}" class="mdl-data-table__cell--non-numeric">Name
+                FamilyName
+            </td>
+            <td th:text="${member.email}" class="mdl-data-table__cell--non-numeric">Email</td>
+            <td th:text="${member.knittingCrewRole.roleName}" class="mdl-data-table__cell--non-numeric">Role</td>
+            <td th:text="${member.knownStitches.size()}" class="mdl-data-table__cell--non-numeric">Stitches</td>
+            <td class="mdl-data-table__cell--non-numeric"><a href="detail"
+                                                             th:href="@{/knittingcrew/memberDetail/{id} (id=${member.id})}">details</a>
+            </td>
+        </tr>
         </tbody>
     </table>
     <br>
-    <form action="/knittingcrew/addMember">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
-            <i class="material-icons">add</i> ADD
-        </button>
-    </form>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <form action="/knittingcrew/addMember">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+                <i class="material-icons">add</i> ADD
+            </button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
