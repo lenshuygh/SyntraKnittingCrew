@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>MemberDetails</title>
@@ -8,84 +8,106 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-deep_orange.min.css"/>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <style>
-        .page {
-            padding-left: 50px;
+        .page-content {
+            padding-left: 150px;
             padding-right: 50px;
         }
     </style>
 </head>
 <body class="page">
-<h3>Member details</h3>
-<form th:object="${member}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="name" th:field="*{name}">
-        <label class="mdl-textfield__label" for="name">Name</label>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="fName" th:field="*{familyName}">
-        <label class="mdl-textfield__label" for="fName">Last name</label>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="mail" th:field="*{email}">
-        <label class="mdl-textfield__label" for="mail">Email address</label>
-    </div>
-    <br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="street" th:field="*{address.street}">
-        <label class="mdl-textfield__label" for="street">Street</label>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="houseN" th:field="*{address.houseNumber}">
-        <label class="mdl-textfield__label" for="houseN">Number</label>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="poBox" th:field="*{address.poBox}">
-        <label class="mdl-textfield__label" for="poBox">PO Box</label>
-    </div>
-    <br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="zip" th:field="*{address.zipCode}">
-        <label class="mdl-textfield__label" for="zip">Zipcode</label>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="city" th:field="*{address.city}">
-        <label class="mdl-textfield__label" for="city">City</label>
-    </div>
-    <br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="phone" th:field="*{phone}">
-        <label class="mdl-textfield__label" for="phone">Phonenumber</label>
-    </div>
-    <br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="bDate" th:field="*{birthDate}">
-        <label class="mdl-textfield__label" for="bDate">Birthdate</label>
-    </div>
-    <br>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <a class="mdl-navigation__link mdl-layout-title" href="/knittingcrew/overview">Knitting Crew</a>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <div sec:authorize="isAuthenticated()">
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a class="mdl-navigation__link" href="/logout">Logout</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <h3>Member details</h3>
+            <form th:object="${member}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="name" th:field="*{name}">
+                    <label class="mdl-textfield__label" for="name">Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="fName" th:field="*{familyName}">
+                    <label class="mdl-textfield__label" for="fName">Last name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="mail" th:field="*{email}">
+                    <label class="mdl-textfield__label" for="mail">Email address</label>
+                </div>
+                <br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="street" th:field="*{address.street}">
+                    <label class="mdl-textfield__label" for="street">Street</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="houseN" th:field="*{address.houseNumber}">
+                    <label class="mdl-textfield__label" for="houseN">Number</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="poBox" th:field="*{address.poBox}">
+                    <label class="mdl-textfield__label" for="poBox">PO Box</label>
+                </div>
+                <br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="zip" th:field="*{address.zipCode}">
+                    <label class="mdl-textfield__label" for="zip">Zipcode</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="city" th:field="*{address.city}">
+                    <label class="mdl-textfield__label" for="city">City</label>
+                </div>
+                <br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="phone" th:field="*{phone}">
+                    <label class="mdl-textfield__label" for="phone">Phonenumber</label>
+                </div>
+                <br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="bDate" th:field="*{birthDate}">
+                    <label class="mdl-textfield__label" for="bDate">Birthdate</label>
+                </div>
+                <br>
 
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="roleLabel" disabled>
-        <label class="mdl-textfield__label" for="roleLabel">Role</label>
-        <select id="myselect" name="knittingCrewRole" class="mdl-selectfield__select" th:field="*{knittingCrewRole}">
-            <option th:each="role : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole).values()}"
-                    th:text="${role.roleName}" th:value="${role}"></option>
-        </select>
-    </div>
-    <br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="stitchLabel" disabled>
-        <label class="mdl-textfield__label" for="stitchLabel">Known stitches</label>
-        <select multiple id="myselect2" name="knittingCrewRole" class="mdl-selectfield__select"
-                th:field="*{knownStitches}">
-            <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
-                    th:text="${stitch}" th:value="${{stitch}}"></option>
-        </select>
-    </div>
-    <br>
-    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
-        <i class="material-icons">save</i> SAVE
-    </button>
-</form>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="roleLabel" disabled>
+                    <label class="mdl-textfield__label" for="roleLabel">Role</label>
+                    <select id="myselect" name="knittingCrewRole" class="mdl-selectfield__select"
+                            th:field="*{knittingCrewRole}">
+                        <option th:each="role : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.KnittingCrewRole).values()}"
+                                th:text="${role.roleName}" th:value="${role}"></option>
+                    </select>
+                </div>
+                <br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="stitchLabel" disabled>
+                    <label class="mdl-textfield__label" for="stitchLabel">Known stitches</label>
+                    <select multiple id="myselect2" name="knittingCrewRole" class="mdl-selectfield__select"
+                            th:field="*{knownStitches}">
+                        <option th:each="stitch : ${T(be.lens.syntra.spring.knittingcrewhomepage.model.Stitches).values()}"
+                                th:text="${stitch}" th:value="${{stitch}}"></option>
+                    </select>
+                </div>
+                <br>
+                <button type="submit"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+                    <i class="material-icons">save</i> SAVE
+                </button>
+            </form>
+        </div>
+    </main>
+</div>
 </body>
 </html>

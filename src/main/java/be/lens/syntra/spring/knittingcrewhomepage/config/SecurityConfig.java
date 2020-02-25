@@ -20,6 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/knittingcrew/login")
                 .permitAll()
                 .and()
+                .logout()
+                .and()
                 .csrf().disable();
 
         http.formLogin().defaultSuccessUrl("/knittingcrew/overview", true);
