@@ -4,10 +4,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -23,6 +20,7 @@ public class Member {
     @NotEmpty
     private String familyName;
     @NotEmpty
+    @Email
     private String email;
     @NotNull
     private KnittingCrewRole knittingCrewRole;
