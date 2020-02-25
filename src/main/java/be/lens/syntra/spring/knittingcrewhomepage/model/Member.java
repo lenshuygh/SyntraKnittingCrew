@@ -3,9 +3,11 @@ package be.lens.syntra.spring.knittingcrewhomepage.model;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -24,6 +26,7 @@ public class Member {
     private String email;
     @NotNull
     private KnittingCrewRole knittingCrewRole;
+    @Valid
     private Address address;
     @NotEmpty
     private String phone;
@@ -31,6 +34,6 @@ public class Member {
     @Past
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
-    @NotNull
+    @Size(min = 1)
     private Collection<Stitches> knownStitches;
 }
