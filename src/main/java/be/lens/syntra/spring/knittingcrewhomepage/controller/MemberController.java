@@ -5,10 +5,12 @@ import be.lens.syntra.spring.knittingcrewhomepage.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,9 +45,15 @@ public class MemberController {
     }
 
     @PostMapping("/editMember/*")
-    public String saveUpdatedMember(@ModelAttribute("member") Member member) {
+    public ModelAndView saveUpdatedMember(@Valid @ModelAttribute("member") Member member, BindingResult br) {
+        if(br.hasErrors()){
+            for(String code : br.getFieldError().getCodes()){
+                System.out.println(code);
+                return new ModelAndView("edit","member",member);
+            }
+        }
         memberService.updateMember(member);
-        return "redirect:/knittingcrew/overview";
+        return new ModelAndView("redirect:/knittingcrew/overview");
     }
 
 

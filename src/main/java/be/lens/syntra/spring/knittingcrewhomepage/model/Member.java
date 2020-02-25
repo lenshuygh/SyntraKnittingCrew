@@ -3,6 +3,9 @@ package be.lens.syntra.spring.knittingcrewhomepage.model;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -13,13 +16,21 @@ import java.util.Collection;
 @Builder
 public class Member {
     private int id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String familyName;
+    @NotEmpty
     private String email;
+    @NotNull
     private KnittingCrewRole knittingCrewRole;
     private Address address;
+    @NotEmpty
     private String phone;
+    @NotNull
+    @Past
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
+    @NotNull
     private Collection<Stitches> knownStitches;
 }
