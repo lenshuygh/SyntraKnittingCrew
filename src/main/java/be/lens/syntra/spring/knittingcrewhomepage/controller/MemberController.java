@@ -65,9 +65,15 @@ public class MemberController {
     }
 
     @PostMapping("/addMember")
-    public String saveNewMember(@ModelAttribute("member") Member member){
+    public ModelAndView saveNewMember(@Valid @ModelAttribute("member") Member member, BindingResult br){
+        if(br.hasErrors()){
+            for(String code : br.getFieldError().getCodes()){
+                System.out.println(code);
+                return new ModelAndView("edit","member",member);
+            }
+        }
         memberService.addMember(member);
-        return "redirect:/knittingcrew/overview";
+        return new ModelAndView("redirect:/knittingcrew/overview");
     }
 
     @GetMapping
