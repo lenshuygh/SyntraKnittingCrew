@@ -14,7 +14,8 @@ public class Address {
     private String street;
     @NotEmpty(message = "Please enter a number")
     private String houseNumber;
-    private String poBox;
+    @Builder.Default
+    private String poBox = "/";
     @NotEmpty(message = "Please enter a zip code")
     private String zipCode;
     @NotEmpty(message = "Please enter a city")

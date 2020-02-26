@@ -6,6 +6,7 @@ import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 import be.lens.syntra.spring.knittingcrewhomepage.model.Stitches;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +18,52 @@ public class MemberRepositoryImpl implements MemberRepository {
     private static final int ID_FOR_NEW_MEMBER = -1;
     private List<Member> members;
 
-    public MemberRepositoryImpl() {
+    @PostConstruct
+    private void createDummyData() {
         List<Stitches> stitches = new ArrayList<>();
         stitches.add(Stitches.CABLE);
         stitches.add(Stitches.BEGINNER_LACE);
         List<Stitches> stitches2 = new ArrayList<>(stitches);
         stitches2.add(Stitches.RIB);
         members = new ArrayList<>();
-        Address address = Address.builder().city("Diepenbeek").houseNumber("85").poBox("/").street("Ganzestreet").zipCode("3590").build();
-        Member member1 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.MEMBER).address(address).phone("0498/21.26.22").birthDate(LocalDate.of(1980, 06, 23)).build();
+        Address address = Address.builder().city("Diepenbeek").houseNumber("85").poBox("4A").street("Ganzestraat").zipCode("3590").build();
+        Member member1 = Member.builder()
+                .name("Lens")
+                .familyName("Huygh")
+                .id(createId())
+                .email("lens.huygh@gmail.com")
+                .knownStitches(stitches)
+                .knittingCrewRole(KnittingCrewRole.MEMBER)
+                .address(address)
+                .phone("0498/21.26.22")
+                .birthDate(LocalDate.of(1980, 06, 23))
+                .build();
         members.add(member1);
-        Member member2 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches).knittingCrewRole(KnittingCrewRole.PRESIDENT).address(address).build();
+        address = Address.builder().street("Stoopkesstraat").houseNumber("8").city("Hasselt").zipCode("3500").build();
+        Member member2 = Member.builder()
+                .name("Gert")
+                .familyName("Huygh")
+                .id(createId())
+                .email("gert.huygh@gmail.com")
+                .knownStitches(stitches)
+                .knittingCrewRole(KnittingCrewRole.PRESIDENT)
+                .address(address)
+                .phone("0486/88.99.22")
+                .birthDate(LocalDate.of(1982,03,06))
+                .build();
         members.add(member2);
-        Member member3 = Member.builder().name("Lens").familyName("Huygh").id(createId()).email("lens.huygh@gmail.com").knownStitches(stitches2).knittingCrewRole(KnittingCrewRole.VICE_PRESIDENT).address(address).build();
+        address = Address.builder().street("Sint Barbarastraat").houseNumber("60").city("Diepenbeek").zipCode("3590").build();
+        Member member3 = Member.builder()
+                .name("Lotte")
+                .familyName("Huygh")
+                .id(createId())
+                .email("lotte.huygh@gmail.com")
+                .knownStitches(stitches2)
+                .knittingCrewRole(KnittingCrewRole.VICE_PRESIDENT)
+                .address(address)
+                .phone("0486/77.88.99")
+                .birthDate(LocalDate.of(1984,10,20))
+                .build();
         members.add(member3);
     }
 
