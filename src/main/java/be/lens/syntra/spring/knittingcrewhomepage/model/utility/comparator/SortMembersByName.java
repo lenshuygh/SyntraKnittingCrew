@@ -9,6 +9,10 @@ import java.util.Comparator;
 public class SortMembersByName implements Comparator<Member> {
     @Override
     public int compare(Member member, Member t1) {
-        return member.getFamilyName().toLowerCase().compareTo(t1.getFamilyName().toLowerCase());
+        if (member.getFamilyName().equals(t1.getFamilyName())) {
+            return member.getName().toLowerCase().compareTo(t1.getName().toLowerCase());
+        } else {
+            return member.getFamilyName().toLowerCase().compareTo(t1.getFamilyName().toLowerCase());
+        }
     }
 }
