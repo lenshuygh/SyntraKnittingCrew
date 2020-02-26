@@ -12,7 +12,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/knittingcrew").hasRole("ADMIN")
+                /*.antMatchers("/knittingcrew").hasRole("ADMIN")*/
                 .antMatchers("/knittingcrew/editMember/**").hasRole("ADMIN")
                 .antMatchers("/knittingcrew/addMember").hasRole("ADMIN")
                 .and()
@@ -25,5 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
 
         http.formLogin().defaultSuccessUrl("/knittingcrew/overview", true);
+        http.logout().logoutSuccessUrl("/knittingcrew/");
     }
 }

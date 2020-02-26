@@ -78,7 +78,7 @@ public class MemberController {
 
     @GetMapping
     public String displayStartPage(){
-        return "redirect:/knittingcrew/login";
+        return "redirect:/knittingcrew/overview";
     }
 
     @GetMapping("/login")
