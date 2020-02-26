@@ -15,23 +15,23 @@ import java.util.Collection;
 @Builder
 public class Member {
     private int id;
-    @NotEmpty
+    @NotEmpty(message = "Please enter a name")
     private String name;
-    @NotEmpty
+    @NotEmpty(message = "Please enter a family name")
     private String familyName;
-    @NotEmpty
-    @Email
+    @NotEmpty(message = "Please enter an email")
+    @Email(message = "Please enter a valid email")
     private String email;
     @NotNull
     private KnittingCrewRole knittingCrewRole;
     @Valid
     private Address address;
-    @NotEmpty
+    @NotEmpty(message = "Please enter a phone number")
     private String phone;
-    @NotNull
-    @Past
+    @NotNull(message = "Please enter a date")
+    @Past(message = "The date must be in the past")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
-    @Size(min = 1)
+    @Size(min = 1,message = "Please select at least one stitch")
     private Collection<Stitches> knownStitches;
 }

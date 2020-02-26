@@ -10,13 +10,13 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @Builder
 public class Address {
-    @NotEmpty
+    @NotEmpty(message = "Please enter a street")
     private String street;
-    @NotEmpty
+    @NotEmpty(message = "Please enter a number")
     private String houseNumber;
     private String poBox;
-    @NotEmpty
+    @NotEmpty(message = "Please enter a zip code")
     private String zipCode;
-    @NotEmpty
+    @NotEmpty(message = "Please enter a city")
     private String city;
 }
