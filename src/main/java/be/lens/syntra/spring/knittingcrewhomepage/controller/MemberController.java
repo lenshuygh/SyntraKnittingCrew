@@ -28,13 +28,9 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
-    @Autowired
-    Comparator<Member> memberComparator;
-
     @GetMapping("/overview")
     public String displayOverView(Model model) {
         model.addAttribute("members", memberService.getAllMembers());
-        model.addAttribute("sorter", memberComparator);
         return "overview";
     }
 

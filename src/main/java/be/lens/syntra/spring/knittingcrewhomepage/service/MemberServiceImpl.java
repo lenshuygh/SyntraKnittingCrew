@@ -4,11 +4,14 @@ import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 import be.lens.syntra.spring.knittingcrewhomepage.repository.MemberRepository;
 import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberAlreadyPresentException;
 import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberNotPresentException;
+import org.apache.logging.log4j.util.PropertySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -26,7 +29,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<Member> getAllMembers() {
-        return memberRepository.getAllMembers();
+        return memberRepository.getAllMembers().stream()
+                .sorted(Comparator.comparing(Member::getFamilyName))
+                .sorted(Comparator.comparing(Member::getName))
+                .collect(Collectors.toList());
     }
 
     @Override

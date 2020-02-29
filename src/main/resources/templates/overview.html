@@ -49,8 +49,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="member : ${#lists.sort(members,sorter)}">
-                        <td th:text="${member.name + ' ' + member.familyName}"
+                    <tr th:each="member : ${members}">
+                        <td th:text="${member.familyName+ ' ' + member.name }"
                             class="mdl-data-table__cell--non-numeric">Name
                             FamilyName
                         </td>
