@@ -2,6 +2,8 @@ package be.lens.syntra.spring.knittingcrewhomepage.controller;
 
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 import be.lens.syntra.spring.knittingcrewhomepage.service.MemberService;
+import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberAlreadyPresentException;
+import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberNotPresentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import java.util.Date;
 @RequestMapping("/knittingcrew")
 public class MemberController {
     private static final int ID_FOR_NEW_MEMBER = -1;
+    public static final String MEMBER_MODEL = "member";
+    public static final String REDIRECT_KNITTINGCREW_OVERVIEW = "redirect:/knittingcrew/overview";
     @Autowired
     MemberService memberService;
 
@@ -29,60 +33,54 @@ public class MemberController {
 
     @GetMapping("/overview")
     public String displayOverView(Model model) {
-        model.addAttribute("members",memberService.getAllMembers());
-        model.addAttribute("sorter",memberComparator);
+        model.addAttribute("members", memberService.getAllMembers());
+        model.addAttribute("sorter", memberComparator);
         return "overview";
     }
 
     @GetMapping("/memberDetail/{id}")
-    public ModelAndView displayDetail(@PathVariable String id) {
-        return new ModelAndView("detail", "member", memberService.getMemberById(Integer.parseInt(id)));
+    public ModelAndView displayDetail(@PathVariable String id) throws MemberNotPresentException {
+        return new ModelAndView("detail", MEMBER_MODEL, memberService.getMemberById(Integer.parseInt(id)));
     }
 
     @GetMapping("/editMember/{id}")
-    public ModelAndView displayEditingMember(@PathVariable String id) {
-        return new ModelAndView("edit", "member", memberService.getMemberById(Integer.parseInt(id)));
+    public ModelAndView displayEditingMember(@PathVariable String id) throws MemberNotPresentException {
+        return new ModelAndView("edit", MEMBER_MODEL, memberService.getMemberById(Integer.parseInt(id)));
     }
 
     @PostMapping("/editMember/*")
-    public ModelAndView saveUpdatedMember(@Valid @ModelAttribute("member") Member member, BindingResult br) {
-        if(br.hasErrors()){
-            for(String code : br.getFieldError().getCodes()){
-                System.out.println(code);
-                return new ModelAndView("edit","member",member);
-            }
+    public ModelAndView saveUpdatedMember(@Valid @ModelAttribute("member") Member member, BindingResult br) throws MemberAlreadyPresentException {
+        if (br.hasErrors()) {
+            return new ModelAndView("edit", MEMBER_MODEL, member);
         }
         memberService.updateMember(member);
-        return new ModelAndView("redirect:/knittingcrew/overview");
+        return new ModelAndView(REDIRECT_KNITTINGCREW_OVERVIEW);
     }
 
 
     @GetMapping("/addMember")
-    public ModelAndView provideEmptyFormPage(){
+    public ModelAndView provideEmptyFormPage() {
         Member member = new Member();
         member.setId(ID_FOR_NEW_MEMBER);
-        return new ModelAndView("edit","member",member);
+        return new ModelAndView("edit", MEMBER_MODEL, member);
     }
 
     @PostMapping("/addMember")
-    public ModelAndView saveNewMember(@Valid @ModelAttribute("member") Member member, BindingResult br){
-        if(br.hasErrors()){
-            for(String code : br.getFieldError().getCodes()){
-                System.out.println(code);
-                return new ModelAndView("edit","member",member);
-            }
+    public ModelAndView saveNewMember(@Valid @ModelAttribute("member") Member member, BindingResult br) throws MemberAlreadyPresentException{
+        if (br.hasErrors()) {
+            return new ModelAndView("edit", MEMBER_MODEL, member);
         }
-        memberService.addMember(member);
-        return new ModelAndView("redirect:/knittingcrew/overview");
+            memberService.addMember(member);
+        return new ModelAndView(REDIRECT_KNITTINGCREW_OVERVIEW);
     }
 
     @GetMapping
-    public String displayStartPage(){
-        return "redirect:/knittingcrew/overview";
+    public String displayStartPage() {
+        return REDIRECT_KNITTINGCREW_OVERVIEW;
     }
 
     @GetMapping("/login")
-    public String displayLoginForm(){
+    public String displayLoginForm() {
         return "loginForm";
     }
 

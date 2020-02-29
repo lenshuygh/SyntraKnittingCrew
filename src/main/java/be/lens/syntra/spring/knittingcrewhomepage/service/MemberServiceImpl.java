@@ -2,6 +2,8 @@ package be.lens.syntra.spring.knittingcrewhomepage.service;
 
 import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 import be.lens.syntra.spring.knittingcrewhomepage.repository.MemberRepository;
+import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberAlreadyPresentException;
+import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberNotPresentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,10 @@ public class MemberServiceImpl implements MemberService {
     MemberRepository memberRepository;
 
     @Override
-    public void addMember(Member member) {
+    public void addMember(Member member) throws MemberAlreadyPresentException {
+        if(memberRepository.getMemberByFullName(member.getName(),member.getFamilyName()).isPresent()){
+            throw new MemberAlreadyPresentException(member);
+        }
         memberRepository.addMember(member);
     }
 
@@ -25,10 +30,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member getMemberById(int id) {
+    public Member getMemberById(int id) throws MemberNotPresentException {
         Optional<Member> memberOptional = memberRepository.getMember(id);
-        if (memberOptional.isEmpty()) {
-            //todo throw err
+        if (memberOptional.isPresent()) {
+            throw new MemberNotPresentException(id);
         }
         return memberOptional.get();
     }

@@ -90,6 +90,11 @@ public class MemberRepositoryImpl implements MemberRepository {
         members.remove(member);
     }
 
+    @Override
+    public Optional<Member> getMemberByFullName(String name, String familyName) {
+        return members.stream().filter(m -> m.getName().equals(name)).filter(m -> m.getFamilyName().equals(familyName)).findFirst();
+    }
+
     private int createId() {
         OptionalInt max = members.stream().mapToInt(Member::getId).max();
         return max.isEmpty() ? 1 : max.getAsInt() + 1;

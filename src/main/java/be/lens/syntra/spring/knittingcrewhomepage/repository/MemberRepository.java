@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository {
+    Optional<Member> getMemberByFullName(String name, String familyName);
+
     List<Member> getAllMembers();
 
     Optional<Member> getMember(int id);
