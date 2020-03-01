@@ -11,12 +11,12 @@ public class ExceptionHandling {
 
     @ExceptionHandler(MemberAlreadyPresentException.class)
     public ModelAndView handleAlreadyPresentException(MemberAlreadyPresentException e) {
-        return new ModelAndView("error","localizedMessage",e.getLocalizedMessage());
+        return new ModelAndView("error", "localizedMessage", e.getLocalizedMessage());
     }
 
     @ExceptionHandler(MemberNotPresentException.class)
     public ModelAndView memberNotPresentException(MemberNotPresentException e) {
-        return new ModelAndView("error","localizedMessage",e.getLocalizedMessage());
+        return new ModelAndView("error", "localizedMessage", e.getLocalizedMessage());
     }
 }
 

@@ -4,7 +4,6 @@ import be.lens.syntra.spring.knittingcrewhomepage.model.Member;
 import be.lens.syntra.spring.knittingcrewhomepage.repository.MemberRepository;
 import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberAlreadyPresentException;
 import be.lens.syntra.spring.knittingcrewhomepage.service.exception.MemberNotPresentException;
-import org.apache.logging.log4j.util.PropertySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void addMember(Member member) throws MemberAlreadyPresentException {
-        if(memberRepository.getMemberByFullName(member.getName(),member.getFamilyName()).isPresent()){
+        if (memberRepository.getMemberByFullName(member.getName(), member.getFamilyName()).isPresent()) {
             throw new MemberAlreadyPresentException(member);
         }
         memberRepository.addMember(member);
@@ -38,16 +37,22 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member getMemberById(int id) throws MemberNotPresentException {
         Optional<Member> memberOptional = memberRepository.getMember(id);
-        if (!memberOptional.isPresent()) {
+        if (memberOptional.isEmpty()) {
             throw new MemberNotPresentException(id);
         }
         return memberOptional.get();
     }
 
     @Override
-    public void updateMember(Member updatedMember) throws MemberAlreadyPresentException {
-        Member memberToUpdate = memberRepository.getMember(updatedMember.getId()).get();
-        if(memberRepository.getMemberByFullName(updatedMember.getName(),updatedMember.getFamilyName()).isPresent()){
+    public void updateMember(Member updatedMember) throws MemberAlreadyPresentException,MemberNotPresentException {
+        Member memberToUpdate;
+        Optional<Member> memberOptional = memberRepository.getMember(updatedMember.getId());
+        if(memberOptional.isPresent()){
+            memberToUpdate = memberOptional.get();
+        }else{
+            throw new MemberNotPresentException(updatedMember.getId());
+        }
+        if (memberRepository.getMemberByFullName(updatedMember.getName(), updatedMember.getFamilyName()).isPresent()) {
             throw new MemberAlreadyPresentException(updatedMember);
         }
         memberRepository.removeMember(memberToUpdate);

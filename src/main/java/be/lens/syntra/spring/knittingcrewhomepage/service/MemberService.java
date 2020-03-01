@@ -13,5 +13,5 @@ public interface MemberService {
 
     Member getMemberById(int id) throws MemberNotPresentException;
 
-    void updateMember(Member member) throws MemberAlreadyPresentException;
+    void updateMember(Member member) throws MemberAlreadyPresentException,MemberNotPresentException;
 }

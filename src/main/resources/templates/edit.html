@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>MemberDetails</title>
@@ -12,12 +12,9 @@
             padding-left: 150px;
             padding-right: 50px;
         }
+
         .errorMessage {
             color: darkred;
-        }
-
-        .errorField {
-            background-color: burlywood;
         }
     </style>
 </head>
@@ -42,67 +39,78 @@
     <main class="mdl-layout__content">
         <div class="page-content">
             <h3>Member details</h3>
-            <form th:object="${member}" method="post" >
+            <form th:object="${member}" method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="name" th:field="*{name}">
-                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errorMessage md-textfield__label" for="name">Error Message</label>
+                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                           class="errorMessage md-textfield__label" for="name">Error Message</label>
                     <label class="mdl-textfield__label" for="name">Name</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="fName" th:field="*{familyName}">
-                    <label th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}" class="errorMessage md-textfield__label" for="fName">Error Message</label>
+                    <label th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"
+                           class="errorMessage md-textfield__label" for="fName">Error Message</label>
                     <label class="mdl-textfield__label" for="fName">Last name</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="mail" th:field="*{email}">
-                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="errorMessage md-textfield__label" for="mail">Error Message</label>
+                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                           class="errorMessage md-textfield__label" for="mail">Error Message</label>
                     <label class="mdl-textfield__label" for="mail">Email address</label>
                 </div>
                 <br>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="street" th:field="*{address.street}">
-                    <label th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}" class="errorMessage md-textfield__label" for="street">Error Message</label>
+                    <label th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"
+                           class="errorMessage md-textfield__label" for="street">Error Message</label>
                     <label class="mdl-textfield__label" for="street">Street</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="houseN" th:field="*{address.houseNumber}">
-                    <label th:if="${#fields.hasErrors('address.houseNumber')}" th:errors="*{address.houseNumber}" class="errorMessage md-textfield__label" for="houseN">Error Message</label>
+                    <label th:if="${#fields.hasErrors('address.houseNumber')}" th:errors="*{address.houseNumber}"
+                           class="errorMessage md-textfield__label" for="houseN">Error Message</label>
                     <label class="mdl-textfield__label" for="houseN">Number</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="poBox" th:field="*{address.poBox}">
-                    <label th:if="${#fields.hasErrors('address.poBox')}" th:errors="*{address.poBox}" class="errorMessage md-textfield__label" for="poBox">Error Message</label>
+                    <label th:if="${#fields.hasErrors('address.poBox')}" th:errors="*{address.poBox}"
+                           class="errorMessage md-textfield__label" for="poBox">Error Message</label>
                     <label class="mdl-textfield__label" for="poBox">PO Box</label>
                 </div>
                 <br>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="zip" th:field="*{address.zipCode}">
-                    <label th:if="${#fields.hasErrors('address.zipCode')}" th:errors="*{address.zipCode}" class="errorMessage md-textfield__label" for="zip">Error Message</label>
+                    <label th:if="${#fields.hasErrors('address.zipCode')}" th:errors="*{address.zipCode}"
+                           class="errorMessage md-textfield__label" for="zip">Error Message</label>
                     <label class="mdl-textfield__label" for="zip">Zipcode</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="city" th:field="*{address.city}">
-                    <label th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}" class="errorMessage md-textfield__label" for="city">Error Message</label>
+                    <label th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"
+                           class="errorMessage md-textfield__label" for="city">Error Message</label>
                     <label class="mdl-textfield__label" for="city">City</label>
                 </div>
                 <br>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="phone" th:field="*{phone}">
-                    <label th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="errorMessage md-textfield__label" for="phone">Error Message</label>
+                    <label th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+                           class="errorMessage md-textfield__label" for="phone">Error Message</label>
                     <label class="mdl-textfield__label" for="phone">Phonenumber</label>
                 </div>
                 <br>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="bDate" th:field="*{birthDate}">
-                    <label th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="errorMessage md-textfield__label" for="bDate">Error Message</label>
+                    <label th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"
+                           class="errorMessage md-textfield__label" for="bDate">Error Message</label>
                     <label class="mdl-textfield__label" for="bDate">Birthdate</label>
                 </div>
                 <br>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="roleLabel" disabled>
-                    <label th:if="${#fields.hasErrors('knittingCrewRole')}" th:errors="*{knittingCrewRole}" class="errorMessage md-textfield__label" for="roleLabel">Error Message</label>
+                    <label th:if="${#fields.hasErrors('knittingCrewRole')}" th:errors="*{knittingCrewRole}"
+                           class="errorMessage md-textfield__label" for="roleLabel">Error Message</label>
                     <label class="mdl-textfield__label" for="roleLabel">Role</label>
                     <select id="myselect" name="knittingCrewRole" class="mdl-selectfield__select"
                             th:field="*{knittingCrewRole}">
@@ -113,7 +121,8 @@
                 <br>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="stitchLabel" disabled>
-                    <label th:if="${#fields.hasErrors('knownStitches')}" th:errors="*{knownStitches}" class="errorMessage md-textfield__label" for="stitchLabel">Error Message</label>
+                    <label th:if="${#fields.hasErrors('knownStitches')}" th:errors="*{knownStitches}"
+                           class="errorMessage md-textfield__label" for="stitchLabel">Error Message</label>
                     <label class="mdl-textfield__label" for="stitchLabel">Known stitches</label>
                     <select multiple id="myselect2" name="knittingCrewRole" class="mdl-selectfield__select"
                             th:field="*{knownStitches}">

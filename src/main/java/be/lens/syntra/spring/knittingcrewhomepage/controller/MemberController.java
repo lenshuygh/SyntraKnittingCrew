@@ -16,15 +16,14 @@ import javax.validation.Valid;
 import java.beans.PropertyEditorSupport;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.util.Date;
 
 @Controller
 @RequestMapping("/knittingcrew")
 public class MemberController {
     private static final int ID_FOR_NEW_MEMBER = -1;
-    public static final String MEMBER_MODEL = "member";
-    public static final String REDIRECT_KNITTINGCREW_OVERVIEW = "redirect:/knittingcrew/overview";
+    private static final String MEMBER_MODEL = "member";
+    private static final String REDIRECT_KNITTINGCREW_OVERVIEW = "redirect:/knittingcrew/overview";
     @Autowired
     MemberService memberService;
 
@@ -45,7 +44,7 @@ public class MemberController {
     }
 
     @PostMapping("/editMember/*")
-    public ModelAndView saveUpdatedMember(@Valid @ModelAttribute("member") Member member, BindingResult br) throws MemberAlreadyPresentException {
+    public ModelAndView saveUpdatedMember(@Valid @ModelAttribute("member") Member member, BindingResult br) throws MemberAlreadyPresentException, MemberNotPresentException {
         if (br.hasErrors()) {
             return new ModelAndView("edit", MEMBER_MODEL, member);
         }
@@ -62,11 +61,11 @@ public class MemberController {
     }
 
     @PostMapping("/addMember")
-    public ModelAndView saveNewMember(@Valid @ModelAttribute("member") Member member, BindingResult br) throws MemberAlreadyPresentException{
+    public ModelAndView saveNewMember(@Valid @ModelAttribute("member") Member member, BindingResult br) throws MemberAlreadyPresentException {
         if (br.hasErrors()) {
             return new ModelAndView("edit", MEMBER_MODEL, member);
         }
-            memberService.addMember(member);
+        memberService.addMember(member);
         return new ModelAndView(REDIRECT_KNITTINGCREW_OVERVIEW);
     }
 

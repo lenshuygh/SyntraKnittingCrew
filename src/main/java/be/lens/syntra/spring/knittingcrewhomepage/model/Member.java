@@ -27,12 +27,12 @@ public class Member {
     @Valid
     private Address address;
     @NotEmpty(message = "Please enter a phone number")
-    @Pattern(regexp = "\\d{2,4}/\\d{2}\\.\\d{2}\\.\\d{2}",message = "Please enter a number like xx/xx.xx.xx, xxx/xx.xx.xx or xxxx/xx.xx.xx")
+    @Pattern(regexp = "\\d{2,4}/\\d{2}\\.\\d{2}\\.\\d{2}", message = "Please enter a number like xx/xx.xx.xx, xxx/xx.xx.xx or xxxx/xx.xx.xx")
     private String phone;
     @NotNull(message = "Please enter a date")
     @Past(message = "The date must be in the past")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
-    @Size(min = 1,message = "Please select at least one stitch")
+    @Size(min = 1, message = "Please select at least one stitch")
     private Collection<Stitches> knownStitches;
 }

@@ -49,7 +49,7 @@ public class MemberRepositoryImpl implements MemberRepository {
                 .knittingCrewRole(KnittingCrewRole.PRESIDENT)
                 .address(address)
                 .phone("0486/88.99.22")
-                .birthDate(LocalDate.of(1982,03,06))
+                .birthDate(LocalDate.of(1982, 03, 06))
                 .build();
         members.add(member2);
         address = Address.builder().street("Sint Barbarastraat").houseNumber("60").city("Diepenbeek").zipCode("3590").build();
@@ -62,7 +62,7 @@ public class MemberRepositoryImpl implements MemberRepository {
                 .knittingCrewRole(KnittingCrewRole.VICE_PRESIDENT)
                 .address(address)
                 .phone("0486/77.88.99")
-                .birthDate(LocalDate.of(1984,10,20))
+                .birthDate(LocalDate.of(1984, 10, 20))
                 .build();
         members.add(member3);
     }
@@ -79,7 +79,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     @Override
     public void addMember(Member member) {
-        if(member.getId() == ID_FOR_NEW_MEMBER) {
+        if (member.getId() == ID_FOR_NEW_MEMBER) {
             member.setId(createId());
         }
         members.add(member);
