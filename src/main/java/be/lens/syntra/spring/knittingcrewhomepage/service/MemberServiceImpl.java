@@ -29,8 +29,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> getAllMembers() {
         return memberRepository.getAllMembers().stream()
-                .sorted(Comparator.comparing(Member::getFamilyName))
-                .sorted(Comparator.comparing(Member::getName))
+                .sorted(Comparator.comparing(Member::getFamilyName).thenComparing(Member::getName))
                 .collect(Collectors.toList());
     }
 
