@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
         }else{
             throw new MemberNotPresentException(updatedMember.getId());
         }
-        if (memberRepository.getMemberByFullName(updatedMember.getName(), updatedMember.getFamilyName()).isPresent()) {
+        if (memberRepository.getMemberByFullName(updatedMember.getName(), updatedMember.getFamilyName()).isPresent() && memberToUpdate.getId() != updatedMember.getId()) {
             throw new MemberAlreadyPresentException(updatedMember);
         }
         memberRepository.removeMember(memberToUpdate);
