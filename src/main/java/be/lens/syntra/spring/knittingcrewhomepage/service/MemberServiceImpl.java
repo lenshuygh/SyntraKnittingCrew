@@ -38,15 +38,18 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member getMemberById(int id) throws MemberNotPresentException {
         Optional<Member> memberOptional = memberRepository.getMember(id);
-        if (memberOptional.isPresent()) {
+        if (!memberOptional.isPresent()) {
             throw new MemberNotPresentException(id);
         }
         return memberOptional.get();
     }
 
     @Override
-    public void updateMember(Member updatedMember) {
+    public void updateMember(Member updatedMember) throws MemberAlreadyPresentException {
         Member memberToUpdate = memberRepository.getMember(updatedMember.getId()).get();
+        if(memberRepository.getMemberByFullName(updatedMember.getName(),updatedMember.getFamilyName()).isPresent()){
+            throw new MemberAlreadyPresentException(updatedMember);
+        }
         memberRepository.removeMember(memberToUpdate);
         memberRepository.addMember(updatedMember);
     }
